@@ -9,7 +9,8 @@ const TalentSchema = new mongoose.Schema({
         id: String,
         text: String
     },
-    profileImgUrl: String
+    profileImgUrl: String,
+    branch: String
 });
 
 const Talent = mongoose.model('Talent', TalentSchema);
