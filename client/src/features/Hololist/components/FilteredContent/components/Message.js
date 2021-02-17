@@ -5,7 +5,7 @@ const MainContainer = styled.div({
   border: "1px solid gray",
   display: "flex",
   flexDirection: "column",
-  margin: "0 1rem 3rem 0",
+  marginBottom: '3rem',
   borderRadius: "1rem",
   flex: "1",
 });
@@ -36,7 +36,9 @@ const ScreenNameContainer = styled.a({
 });
 
 const BodyContainer = styled.div({
+  display: 'flex',
   padding: "1rem",
+  width: '100%'
 });
 
 const Message = ({ image, name, screenName, statusText, url }) => {

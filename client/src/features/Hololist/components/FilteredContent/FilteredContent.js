@@ -7,6 +7,7 @@ const ContentContainer = styled.div({
   display: "flex",
   flexDirection: "column",
   width: "100%",
+  paddingBottom: '3rem'
 });
 
 const FilteredContent = ({ props }) => {

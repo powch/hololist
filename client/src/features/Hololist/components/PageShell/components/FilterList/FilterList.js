@@ -10,13 +10,15 @@ const SubFilterContainer = styled.div(({ active }) => ({
   paddingLeft: "3rem",
 }));
 
-const ClearFilterButton = styled.button({
+const ClearFilterButton = styled.button(({ disabled }) => ({
   width: "100%",
   color: "grey",
   padding: ".5rem",
   marginTop: "1rem",
   border: "1px solid grey",
-});
+  opacity: disabled ? "50%" : "100%",
+  cursor: disabled ? "not-allowed" : "pointer"
+}));
 
 const FilterList = ({ props }) => {
   const { state, dispatch } = props;
@@ -31,12 +33,11 @@ const FilterList = ({ props }) => {
   const filterClick = (payload) =>
     dispatch({ type: "EDIT_ACTIVE_FILTERS", payload });
 
-  const clearFilterClick = () =>
-    dispatch({ type: "CLEAR_ACTIVE_FILTERS" });
+  const clearFilterClick = () => dispatch({ type: "CLEAR_ACTIVE_FILTERS" });
 
-  const selectAllJP = () => dispatch({ type: 'SELECT_ALL_JP' });
-  const selectAllID = () => dispatch({ type: 'SELECT_ALL_ID' });
-  const selectAllEN = () => dispatch({ type: 'SELECT_ALL_EN' });
+  const selectAllJP = () => dispatch({ type: "SELECT_ALL_JP" });
+  const selectAllID = () => dispatch({ type: "SELECT_ALL_ID" });
+  const selectAllEN = () => dispatch({ type: "SELECT_ALL_EN" });
 
   return (
     <React.Fragment>
@@ -140,7 +141,10 @@ const FilterList = ({ props }) => {
           handleClick={() => filterClick("EN1")}
         />
       </SubFilterContainer>
-      <ClearFilterButton onClick={() => clearFilterClick()}>
+      <ClearFilterButton
+        onClick={() => clearFilterClick()}
+        disabled={activeFilters.length === 0}
+      >
         Clear filters
       </ClearFilterButton>
     </React.Fragment>

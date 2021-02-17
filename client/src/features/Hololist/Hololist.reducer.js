@@ -87,6 +87,13 @@ const reducer = (state, action) => {
     };
   }
 
+  if (type.includes('REFRESH')) {
+    return {
+      ...state,
+      page: 'home.loading'
+    }
+  }
+
   return state;
 };
 

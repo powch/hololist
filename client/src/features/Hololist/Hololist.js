@@ -8,9 +8,20 @@ import FilteredContent from "./components/FilteredContent";
 
 const GlobalStyle = createGlobalStyle`
     body {
-        font-family: Verdana, Arial, Helvetica, sans-serif;     
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        height: 100vh;
+    }
+
+    #root {
+      height: 100%;
     }
 `;
+
+const MainContainer = styled.div({
+  height: '100%',
+  width: '100%',
+  overflow: 'hidden'
+})
 
 const EmptyFilterContainer = styled.div({
   display: "flex",
@@ -34,9 +45,9 @@ const Hololist = (props) => {
   });
 
   return (
-    <React.Fragment>
+    <MainContainer>
       <GlobalStyle />
-      <PageShell props={props} getTalentInfo={getTalentInfo}>
+      <PageShell props={props}>
         {activeFilters.length === 0 && !loading ? (
           <EmptyFilterContainer>
             Choose a filter on the left
@@ -48,7 +59,7 @@ const Hololist = (props) => {
           <EmptyFilterContainer>Loading...</EmptyFilterContainer>
         )}
       </PageShell>
-    </React.Fragment>
+    </MainContainer>
   );
 };
 

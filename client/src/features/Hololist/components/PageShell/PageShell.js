@@ -7,12 +7,14 @@ const Container = styled.div({
   display: "flex",
   flexDirection: "column",
   width: "100%",
+  height: '100%'
 });
 
 const BodyContainer = styled.div({
   display: "flex",
   flexDirection: "row",
   width: "100%",
+  height: '100%'
 });
 
 const HeaderContainer = styled.div({
@@ -26,17 +28,18 @@ const HeaderContainer = styled.div({
 });
 
 const FilterContainer = styled.div({
-  height: "100vh",
   minWidth: "15rem",
   maxWidth: "15rem",
   padding: "1.5rem",
   backgroundColor: "#E5E5E5",
+  height: '100%',
 });
 
 const ContentContainer = styled.div({
   height: "100%",
-  padding: "5rem",
+  padding: "1.5rem 5rem 0 5rem",
   width: "100%",
+  overflow: 'scroll'
 });
 
 const Heading = styled.div({
@@ -52,21 +55,13 @@ const RefreshButton = styled.button({
   marginRight: "1.5rem",
 });
 
-const PageShell = ({ props, children, getTalentInfo }) => {
+const PageShell = ({ props, children }) => {
   const { dispatch } = props;
   return (
     <Container>
       <HeaderContainer>
         <Heading>hololist</Heading>
-        <RefreshButton
-          onClick={() =>
-            getTalentInfo()
-              .then((res) =>
-                dispatch({ type: "INITIAL_DATA_LOAD", payload: res.data })
-              )
-              .catch((err) => console.log(err))
-          }
-        >
+        <RefreshButton onClick={() => dispatch({ type: "REFRESH" })}>
           Refresh
         </RefreshButton>
       </HeaderContainer>
