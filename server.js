@@ -36,32 +36,36 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("DB CONNECTED");
 
-  db.dropCollection('talents').then(res => console.log(res));
-
-  // fetch(twitterUri, {
-  //   method: "GET",
-  //   headers: { Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}` },
-  // })
-  //   .then((res) => res.json())
-  //   .then((talents) => {
-  //     const parsedData = talents.map((user) => ({
-  //       name: user.name,
-  //       screenName: user.screen_name,
-  //       url: user.url,
-  //       status: {
-  //         createdAt: user.status.created_at,
-  //         id: user.status.id,
-  //         text: user.status.text,
-  //       },
-  //       profileImgUrl: user.profile_image_url,
-  //       branch: getBranchName(user.screen_name),
-  //     }));
-
-  //     talentController.create(parsedData, (err, res) => {
-  //       if (err) return console.log(err);
-  //       console.log("db saved");
-  //     });
-  //   });
+  setInterval(() => {
+    fetch(twitterUri, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}` },
+    })
+      .then((res) => res.json())
+      .then((talents) => {
+        const parsedData = talents.map((user) => ({
+          name: user.name,
+          screenName: user.screen_name,
+          url: user.url,
+          status: {
+            createdAt: user.status.created_at,
+            id: user.status.id,
+            text: user.status.text,
+          },
+          profileImgUrl: user.profile_image_url,
+          branch: getBranchName(user.screen_name),
+        }));
+  
+        db.dropCollection("talents")
+          .then((res) => {
+            talentController.create(parsedData, (err, res) => {
+              console.log("db saved");
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }, 600000);
 });
 
 app.listen(PORT, () =>

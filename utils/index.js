@@ -56,7 +56,6 @@ const getBranchName = (userName) => {
   if (EN_GEN_1.includes(userName)) {
     return "EN1";
   }
-
 };
 
 module.exports = {

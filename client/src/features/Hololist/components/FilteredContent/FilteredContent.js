@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Message from "./components/Message";
 
 const ContentContainer = styled.div({
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%'
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
 });
 
 const FilteredContent = ({ props }) => {
@@ -32,6 +32,7 @@ const FilteredContent = ({ props }) => {
               name={talent.name}
               screenName={talent.screenName}
               statusText={talent.status.text}
+              url={talent.url}
             />
           ))
         : null}
